@@ -22,4 +22,12 @@ output:
 ```
 
 ***
+Plot matrices
+ pairs(Newdata)
+ 
+ Residuals vs Fitted diagnostic plot, QQ plot, leverage plot
+ plot(my_regressionmodel2, which = c(1,2,5))
+ 
+ 
+
 
