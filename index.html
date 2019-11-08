@@ -186,7 +186,7 @@ summary {
 <ul>
 <li><a href="#about-the-project">About the project</a></li>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#insert-chapter-2-title-here">Insert chapter 2 title here</a></li>
+<li><a href="#week-2-regression-and-model-validation">Week 2: Regression and model validation</a></li>
 </ul>
 </div>
 
@@ -197,17 +197,16 @@ summary {
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>Hi! My name is <strong>Faranak Halali</strong> and I am PhD student in <em>Clinical Nutrition</em>. I have never worked with R before, until last 2 weeks where I started to learn R basics in Datacamp. I am really excited for this course. I heared about the course from my supervisor and I thank her for that. Here is my GitHub repository link: <a href="https://github.com/faranakhalali/IODS-project/settings">link</a> # Data</p>
+<p>Hi! My name is <strong>Faranak Halali</strong> and I am PhD student in <em>Clinical Nutrition</em>. I have never worked with R before, until last 2 weeks where I started to learn R basics in Datacamp. I am really excited for this course. I heared about the course from my supervisor and I thank her for that. Here is my GitHub repository link: <a href="https://github.com/faranakhalali/IODS-project/settings">link</a></p>
 <hr />
 </div>
-<div id="insert-chapter-2-title-here" class="section level1">
-<h1>Insert chapter 2 title here</h1>
-<p><em>Describe the work you have done this week and summarize your learning.</em></p>
-<ul>
-<li>Describe your work and results clearly.</li>
-<li>Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods.</li>
-<li>Assume the reader has no previous knowledge of your data or the more advanced methods you are using.</li>
-</ul>
+<div id="week-2-regression-and-model-validation" class="section level1">
+<h1>Week 2: Regression and model validation</h1>
+<p>This data has 183 observations for 60 variables. The variables inlcude several questions about different topics along with Age, combination score for Attitude, gender and total points.Today, I read the data from URL web page, combined the questions related to deep, surf and stra and created new columns for each. Then, I made a new dataset including only 7 variables:age, gender, attitude, points, deep, surf, stra. I scaled the combined variables to original scale by dividing each to the number of their questions. I excluded Points&gt;0 values and the Newdata now has 166 observations of 7 variables. I saved the data into csv format using write.csv function. I read the Newdata again and explored the dimensions and structure of the data to check whether everything was done right.</p>
+<p>Now, let’s do the analysis! First, reading the data <strong>(read.table function)</strong> and exploring the dimensions <strong>(dim function)</strong> and structure <strong>(str function)</strong>. It seems right as the Newdata I hade made in data wrnagling process should have 166 observations for 7 variables.These 7 variables are: age, gender, attitude, points, deep, surf, stra. Age, attitude and Points are interval variables, gender is a two-level nominal variables and deep, surf, stra are numerical variables. I used <strong>pairs(Newdata)</strong> function to draw a plot of the relationships between all the variables. It draws 6 plots for each of the 7 variables. From what I see, most of the varaible pairs have positive relationships except for deep&amp;surf, which shows a negative relationship.The most positive relationships seem to be between attitude&amp;points and deep&amp;stra because the plot dots are the most tightly gathered around the imaginary line.</p>
+<p>Now, variables summaries! I used <strong>summary(Newdata$variable)</strong> function to explore the variable summaries. This function shows distribution of categorical variables and mean, min and max values, median (2nd quartile) and quartile 1&amp;3 for the continuous variables. For example, age has a minimum value of 17 and a mean of 25.5. Distribution of gender is: 110 females and 56 males and so on.</p>
+<p>Now, multiple regression analysis! I chose three independent variables to see how they regress against the dependent variable “Points”. According to scatterplot matrices, I chose <strong>Attitude</strong>, <strong>deep</strong> and <strong>stra</strong> as independent variables. I used the function <strong>lm(Points~ Attitude + stra + deep, data = Newdata)</strong> for the regression model. The I used <strong>summary()</strong> function to study the summary of the regression model. Attitude had a significant relationship with Points (p-values&lt;0.001), but the other two independent variables did not show significant relationships. This model had a multiple R-squared of 0.20 which means about 20% of the variation in the depednent variable “Points” is caused by the three indepedent variables. for the next regression model I removed those two insignificant indepedent variables variables. According to the model summary, this new regression model had a multiple R-squared of 0.19 which means about 19% of the variation in the depednent variable “Points” is caused by the indepedent variable “Attitude”. These models highlight the important explanatory role of Attitude in Points.</p>
+<p>Now, model diagnostics! I used the <strong>plot(my_regressionmodel2, which = c(1,2,5))</strong> function to draw three diagnostic plots. The first plot, Residuals vs Fitted, tests the validity of model assumptions. It confirms the linearity assumption and that the regression model is linear. The second plot. QQ plot, tests whethet the errors are normally distributed and it confirms the normal distribution because the dots are well accumulated around the regression line. The last plot shows leverage level of observations and it seems there is a regular leverage with no outstanding outlier.</p>
 <hr />
 </div>
 

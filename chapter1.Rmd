@@ -6,6 +6,3 @@
 # Introduction
 Hi! My name is **Faranak Halali** and I am PhD student in *Clinical Nutrition*. I have never worked with R before, until last 2 weeks where I started to learn R basics in Datacamp. I am really excited for this course. I heared about the course from my supervisor and I thank her for that. Here is my GitHub repository link: 
 [link](https://github.com/faranakhalali/IODS-project/settings)
-
-# Week 2: Regression and model validation
-This data has 183 observations for 60 variables. The variables inlcude several questions about different topics along with Age, combination score for Attitude, gender and total points.Today, I read the data from URL web page, combined the questions related to deep, surf and stra and created new columns for each. Then, I made a new dataset including only 7 variables:age, gender, attitude, points, deep, surf, stra.
