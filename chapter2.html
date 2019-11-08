@@ -188,6 +188,54 @@ summary {
 <p>Now, multiple regression analysis! I chose three independent variables to see how they regress against the dependent variable “Points”. According to scatterplot matrices, I chose <strong>Attitude</strong>, <strong>deep</strong> and <strong>stra</strong> as independent variables. I used the function <strong>lm(Points~ Attitude + stra + deep, data = Newdata)</strong> for the regression model. The I used <strong>summary()</strong> function to study the summary of the regression model. Attitude had a significant relationship with Points (p-values&lt;0.001), but the other two independent variables did not show significant relationships. This model had a multiple R-squared of 0.20 which means about 20% of the variation in the depednent variable “Points” is caused by the three indepedent variables. for the next regression model I removed those two insignificant indepedent variables variables. According to the model summary, this new regression model had a multiple R-squared of 0.19 which means about 19% of the variation in the depednent variable “Points” is caused by the indepedent variable “Attitude”. These models highlight the important explanatory role of Attitude in Points.</p>
 <p>Now, model diagnostics! I used the <strong>plot(my_regressionmodel2, which = c(1,2,5))</strong> function to draw three diagnostic plots. The first plot, Residuals vs Fitted, tests the validity of model assumptions. It confirms the linearity assumption and that the regression model is linear. The second plot. QQ plot, tests whethet the errors are normally distributed and it confirms the normal distribution because the dots are well accumulated around the regression line. The last plot shows leverage level of observations and it seems there is a regular leverage with no outstanding outlier.</p>
 </div>
+<div id="reading-data" class="section level1">
+<h1>Reading data</h1>
+<p>library(dplyr) Faran &lt;- read.table(“<a href="http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt" class="uri">http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt</a>”, sep=“”, header=TRUE)</p>
+</div>
+<div id="exploring-data" class="section level1">
+<h1>Exploring data</h1>
+<p>str(Faran) dim(Faran)</p>
+</div>
+<div id="deep-surf-stra-questions" class="section level1">
+<h1>deep, surf, stra questions</h1>
+<p>deep_questions &lt;- c(“D03”, “D11”, “D19”, “D27”, “D07”, “D14”, “D22”, “D30”,“D06”, “D15”, “D23”, “D31”) surface_questions &lt;- c(“SU02”,“SU10”,“SU18”,“SU26”, “SU05”,“SU13”,“SU21”,“SU29”,“SU08”,“SU16”,“SU24”,“SU32”) strategic_questions &lt;- c(“ST01”,“ST09”,“ST17”,“ST25”,“ST04”,“ST12”,“ST20”,“ST28”)</p>
+</div>
+<div id="deep-surf-stra-columns" class="section level1">
+<h1>deep, surf, stra columns</h1>
+<p>deep_columns &lt;- select(Faran,one_of(deep_questions)) surf_columns &lt;- select(Faran, one_of(surface_questions)) stra_columns &lt;- select(Faran, one_of(strategic_questions)) Faran<span class="math inline">\(deep &lt;- rowMeans(deep_columns) Faran\)</span>surf &lt;- rowMeans(surf_columns) Faran$stra &lt;- rowMeans(stra_columns) keep &lt;- c(“Age”, “gender”, “Attitude”, “Points”, “deep”, “surf”, “stra”) Newdata &lt;- select(Faran, one_of(keep))</p>
+</div>
+<div id="deep-surf-stra-scaling" class="section level1">
+<h1>deep, surf, stra scaling</h1>
+<p>deep_scaled &lt;- Faran<span class="math inline">\(deep/12 surf_scaled &lt;- Faran\)</span>surf/12 stra_sclaed &lt;- Faran$stra/8</p>
+</div>
+<div id="excluding-data" class="section level1">
+<h1>Excluding data</h1>
+<p>Newdata &lt;- filter(Newdata, Points &gt; 0)</p>
+</div>
+<div id="saving-data" class="section level1">
+<h1>Saving data</h1>
+<p>write.csv(Newdata, file = “Newdata.csv”)</p>
+</div>
+<div id="reading-new-data-and-exploring-it" class="section level1">
+<h1>Reading new data and exploring it</h1>
+<p>read.csv(“<a href="http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt" class="uri">http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt</a>”, sep=“”, header=TRUE) dim(Newdata) str(Newdata)</p>
+</div>
+<div id="plot-matrix" class="section level1">
+<h1>Plot matrix</h1>
+<p>pairs(Newdata ) #Regression model and its summary my_regressionmodel &lt;- lm(Points ~ Attitude + stra + deep, data = Newdata) summary(my_regressionmodel)</p>
+</div>
+<div id="regression-model-2-excluding-nonsignificant-explanators" class="section level1">
+<h1>Regression model 2 excluding nonsignificant explanators</h1>
+<p>my_regressionmodel2 &lt;- lm(Points ~ Attitude, data = Newdata) summary(my_regressionmodel2)</p>
+</div>
+<div id="summary-of-variables" class="section level1">
+<h1>Summary of variables</h1>
+<p>summary(Newdata<span class="math inline">\(deep) summary(Newdata\)</span>surf) summary(Newdata<span class="math inline">\(stra) summary(Newdata\)</span>Age) summary(Newdata<span class="math inline">\(gender) summary(Newdata\)</span>Attitude) summary(Newdata$Points)</p>
+</div>
+<div id="regression-diagnostic-plots" class="section level1">
+<h1>Regression diagnostic plots</h1>
+<p>plot(my_regressionmodel2, which = c(1,2,5))</p>
+</div>
 
 
 

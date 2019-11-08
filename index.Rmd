@@ -22,55 +22,6 @@ output:
 ```
 
 ***
-#Reading data
-library(dplyr)
-Faran <- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
-#Exploring data
-str(Faran)
-dim(Faran)
-#deep, surf, stra questions
-deep_questions <- c("D03", "D11", "D19", "D27", "D07", "D14", "D22", "D30","D06",  "D15", "D23", "D31")
-surface_questions <- c("SU02","SU10","SU18","SU26", "SU05","SU13","SU21","SU29","SU08","SU16","SU24","SU32")
-strategic_questions <- c("ST01","ST09","ST17","ST25","ST04","ST12","ST20","ST28")
-#deep, surf, stra columns
-deep_columns <- select(Faran,one_of(deep_questions))
-surf_columns <- select(Faran, one_of(surface_questions))
-stra_columns <- select(Faran, one_of(strategic_questions))
-Faran$deep <- rowMeans(deep_columns)
-Faran$surf <- rowMeans(surf_columns)
-Faran$stra <- rowMeans(stra_columns)
-keep <- c("Age", "gender", "Attitude", "Points", "deep", "surf", "stra")
-Newdata <- select(Faran, one_of(keep))
-#deep, surf, stra scaling
-deep_scaled <- Faran$deep/12
-surf_scaled <- Faran$surf/12
-stra_sclaed <- Faran$stra/8
-#Excluding data
-Newdata <- filter(Newdata, Points > 0)
-#Saving data
-write.csv(Newdata, file = "Newdata.csv")
-#Reading new data and exploring it
-read.csv("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
-dim(Newdata)
-str(Newdata)
-#Plot matrix
-pairs(Newdata)
-#Regression model and its summary
-my_regressionmodel <- lm(Points ~ Attitude + stra + deep, data = Newdata)
-summary(my_regressionmodel)
-#Regression model 2 excluding nonsignificant explanators
-my_regressionmodel2 <- lm(Points ~ Attitude, data = Newdata)
-summary(my_regressionmodel2)
-#Summary of variables
-summary(Newdata$deep)
-summary(Newdata$surf)
-summary(Newdata$stra)
-summary(Newdata$Age)
-summary(Newdata$gender)
-summary(Newdata$Attitude)
-summary(Newdata$Points)
-#Regression diagnostic plots
-plot(my_regressionmodel2, which = c(1,2,5))
 
 
  
