@@ -61,7 +61,7 @@ alc <- mutate(alc, high_use = alc_use > 2)
 
 #look at data to see if everything is in order
 glimpse(alc)
-
+#everything looks right! It has 382 observations with 35 variables
 #save the data
 write.csv(alc, "~/IODS-project/Data/alc.csv")
 
