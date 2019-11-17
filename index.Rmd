@@ -14,11 +14,6 @@ author: "Faranak Halali"
 ```
 
 ***
-
-```{r child = "chapter3.Rmd"}
-```
-
-***
 Read data
 ```{r}
 library(dplyr)
@@ -94,6 +89,10 @@ summary(Newdata$Points)
 Regression diagnostic plots
 ```{r}
 plot(my_regressionmodel2, which = c(1,2,5))
+```
+
+***
+```{r child = "chapter3.Rmd"}
 ```
 
 
