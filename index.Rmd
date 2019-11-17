@@ -94,6 +94,4 @@ plot(my_regressionmodel2, which = c(1,2,5))
 ***
 ```{r child = "chapter3.Rmd"}
 ```
- 
-
 
