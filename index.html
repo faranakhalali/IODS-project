@@ -520,7 +520,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2015707</code></pre>
+<pre><code>## [1] 0.2068063</code></pre>
 <p><strong>Interpretation</strong>: Cross-validation is used to test the accuracy of the predictions of the model on independent unseen data. Data is splitted into two sets: training and test. Training dataset is the actual dataset that we use to train the model. The test dataset is the data used to provide an unbiased evaluation of a final model fit on the training dataset. We can perform multipple rounds of cross-validation (by splitting the dataset into K equal partitions and each time use one part as training data and other parts as test data, this process repeats for all parts) and then calculate the average predictive power for the model. This way we can reduce the variability because all observations are used for both training and testing. In the 10-fold cross-validation, the average number of wrong predictions (prediction errors) is 0.20, i.e., on average, the model wrongly predicts 20 times out of 100 times. In other words, prediction accuracy of the model is 80%. Since the model classification accuracy is 80% when predicting unseen data, so the model seems to have a good predictive power. This model has a lower prediction error (0.20) Compared to the prediction error calculated in the datacamp exercise, which had a prediction error of 0.26.</p>
 </div>
 <div id="super-bonus-question" class="section level1">
@@ -535,7 +535,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m1, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2460733</code></pre>
+<pre><code>## [1] 0.2225131</code></pre>
 <p><strong>Interpretation</strong>: In this model with 10 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.219. Let’s continue with other models!</p>
 <pre class="r"><code>m2 &lt;- glm(high_use ~ sex  + absences + goout + famrel + failures + Medu + Fedu + freetime , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -559,7 +559,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m3, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2094241</code></pre>
+<pre><code>## [1] 0.2198953</code></pre>
 <p><strong>Interpretation</strong>: In this model with 7 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.225 similar to m2 model.</p>
 <pre class="r"><code>m4 &lt;- glm(high_use ~ sex  + absences + goout + famrel + failures + Medu , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -571,7 +571,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m4, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2198953</code></pre>
+<pre><code>## [1] 0.2225131</code></pre>
 <p><strong>Interpretation</strong>: In this model with 6 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.230.</p>
 <pre class="r"><code>m5 &lt;- glm(high_use ~ sex  + absences + goout + famrel + failures , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -583,7 +583,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m5, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2041885</code></pre>
+<pre><code>## [1] 0.2198953</code></pre>
 <p><strong>Interpretation</strong>: In this model with 5 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.214.</p>
 <pre class="r"><code>m6 &lt;- glm(high_use ~ sex  + absences + goout + famrel , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -595,7 +595,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m6, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2015707</code></pre>
+<pre><code>## [1] 0.2120419</code></pre>
 <p><strong>Interpretation</strong>: In this model with 4 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.214. These 4 predictors are the same ones entered into the original regression model for this week’s exercise. I had calculated its average predictions error as 0.204 and now it is slightly different (0.214). However, I do not think this difference would be a crucial problem.</p>
 <pre class="r"><code>m7 &lt;- glm(high_use ~ sex  + absences + goout , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -607,7 +607,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m7, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2120419</code></pre>
+<pre><code>## [1] 0.2041885</code></pre>
 <p><strong>Interpretation</strong>: In this model with 3 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.219.</p>
 <pre class="r"><code>m8 &lt;- glm(high_use ~ sex  + absences , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -619,7 +619,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m8, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2617801</code></pre>
+<pre><code>## [1] 0.2565445</code></pre>
 <p><strong>Interpretation</strong>: In this model with 2 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.261.</p>
 <pre class="r"><code>m9 &lt;- glm(high_use ~ sex , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
