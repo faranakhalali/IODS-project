@@ -5,10 +5,9 @@ Author: Faranak Halali
 
 # Week 3: Logistic Regression
 This week I used the data on students performance in math class and portugese language class. I started with data wrangling and then continued with data analysis. This week's analysis is logistic regression, which is used to study the odds of success in a binary dependent variable based on explanatory variables.
-
 #Reading data and exploring columns
 ```{r}
-alc <- read.csv("~/IODS-project/Data/alc.csv", header=TRUE, sep=",")
+alc <- read.csv("~/IODS-project/Data/alc.csv", header=TRUE, sep=";")
 colnames(alc)
 ```
 **Data explanation**: This data deals with students' (15-22 years of age) performance in two distinct subjects: Mathematics (mat) and Portuguese language (por) in two different schools. Students answered questions on their demographic information, e.g., school name, age, sex, family size, and travel time between home and school as well as their grades in mathematics and Portugese language in three time periods (G1, G2, G3). One important outcome of this study is the amount of alcohol use among these students and how it correlates with their school performance. Their weekday and weekend alcohol consumption were measured on a 5-point scale (1 - very low to 5 - very high).

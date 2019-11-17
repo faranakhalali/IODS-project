@@ -183,20 +183,16 @@ summary {
 <p>Author: Faranak Halali</p>
 <div id="week-3-logistic-regression" class="section level1">
 <h1>Week 3: Logistic Regression</h1>
-<p>This week I used the data on students performance in math class and portugese language class. I started with data wrangling and then continued with data analysis. This week’s analysis is logistic regression, which is used to study the odds of success in a binary dependent variable based on explanatory variables.</p>
-</div>
-<div id="reading-data-and-exploring-columns" class="section level1">
-<h1>Reading data and exploring columns</h1>
-<pre class="r"><code>alc &lt;- read.csv(&quot;~/IODS-project/Data/alc.csv&quot;, header=TRUE, sep=&quot;,&quot;)
+<p>This week I used the data on students performance in math class and portugese language class. I started with data wrangling and then continued with data analysis. This week’s analysis is logistic regression, which is used to study the odds of success in a binary dependent variable based on explanatory variables. #Reading data and exploring columns</p>
+<pre class="r"><code>alc &lt;- read.csv(&quot;~/IODS-project/Data/alc.csv&quot;, header=TRUE, sep=&quot;;&quot;)
 colnames(alc)</code></pre>
-<pre><code>##  [1] &quot;X&quot;          &quot;school&quot;     &quot;sex&quot;        &quot;age&quot;        &quot;address&quot;   
-##  [6] &quot;famsize&quot;    &quot;Pstatus&quot;    &quot;Medu&quot;       &quot;Fedu&quot;       &quot;Mjob&quot;      
-## [11] &quot;Fjob&quot;       &quot;reason&quot;     &quot;nursery&quot;    &quot;internet&quot;   &quot;guardian&quot;  
-## [16] &quot;traveltime&quot; &quot;studytime&quot;  &quot;failures&quot;   &quot;schoolsup&quot;  &quot;famsup&quot;    
-## [21] &quot;paid&quot;       &quot;activities&quot; &quot;higher&quot;     &quot;romantic&quot;   &quot;famrel&quot;    
-## [26] &quot;freetime&quot;   &quot;goout&quot;      &quot;Dalc&quot;       &quot;Walc&quot;       &quot;health&quot;    
-## [31] &quot;absences&quot;   &quot;G1&quot;         &quot;G2&quot;         &quot;G3&quot;         &quot;alc_use&quot;   
-## [36] &quot;high_use&quot;</code></pre>
+<pre><code>##  [1] &quot;school&quot;     &quot;sex&quot;        &quot;age&quot;        &quot;address&quot;    &quot;famsize&quot;   
+##  [6] &quot;Pstatus&quot;    &quot;Medu&quot;       &quot;Fedu&quot;       &quot;Mjob&quot;       &quot;Fjob&quot;      
+## [11] &quot;reason&quot;     &quot;nursery&quot;    &quot;internet&quot;   &quot;guardian&quot;   &quot;traveltime&quot;
+## [16] &quot;studytime&quot;  &quot;failures&quot;   &quot;schoolsup&quot;  &quot;famsup&quot;     &quot;paid&quot;      
+## [21] &quot;activities&quot; &quot;higher&quot;     &quot;romantic&quot;   &quot;famrel&quot;     &quot;freetime&quot;  
+## [26] &quot;goout&quot;      &quot;Dalc&quot;       &quot;Walc&quot;       &quot;health&quot;     &quot;absences&quot;  
+## [31] &quot;G1&quot;         &quot;G2&quot;         &quot;G3&quot;         &quot;alc_use&quot;    &quot;high_use&quot;</code></pre>
 <p><strong>Data explanation</strong>: This data deals with students’ (15-22 years of age) performance in two distinct subjects: Mathematics (mat) and Portuguese language (por) in two different schools. Students answered questions on their demographic information, e.g., school name, age, sex, family size, and travel time between home and school as well as their grades in mathematics and Portugese language in three time periods (G1, G2, G3). One important outcome of this study is the amount of alcohol use among these students and how it correlates with their school performance. Their weekday and weekend alcohol consumption were measured on a 5-point scale (1 - very low to 5 - very high).</p>
 </div>
 <div id="choose-4-variables-for-potential-hypotheses-regarding-their-relationships-with-alcohol-use" class="section level1">
@@ -352,7 +348,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m2, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2120419</code></pre>
+<pre><code>## [1] 0.2172775</code></pre>
 <p><strong>Interpretation</strong>: In this model with 8 predictors the results of 10-fold cross-validation shows that the average prediction error of this model is 0.225.</p>
 <pre class="r"><code>m3 &lt;- glm(high_use ~ sex  + absences + goout + famrel + failures + Medu + Fedu , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -364,7 +360,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m3, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2146597</code></pre>
+<pre><code>## [1] 0.2068063</code></pre>
 <p><strong>Interpretation</strong>: In this model with 7 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.225 similar to m2 model.</p>
 <pre class="r"><code>m4 &lt;- glm(high_use ~ sex  + absences + goout + famrel + failures + Medu , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -376,7 +372,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m4, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2094241</code></pre>
+<pre><code>## [1] 0.2146597</code></pre>
 <p><strong>Interpretation</strong>: In this model with 6 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.230.</p>
 <pre class="r"><code>m5 &lt;- glm(high_use ~ sex  + absences + goout + famrel + failures , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -388,7 +384,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m5, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2146597</code></pre>
+<pre><code>## [1] 0.2225131</code></pre>
 <p><strong>Interpretation</strong>: In this model with 5 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.214.</p>
 <pre class="r"><code>m6 &lt;- glm(high_use ~ sex  + absences + goout + famrel , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -412,7 +408,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m7, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2146597</code></pre>
+<pre><code>## [1] 0.2225131</code></pre>
 <p><strong>Interpretation</strong>: In this model with 3 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.219.</p>
 <pre class="r"><code>m8 &lt;- glm(high_use ~ sex  + absences , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
@@ -424,7 +420,7 @@ loss_func(class = alc$high_use, prob = alc$probability)</code></pre>
 <pre class="r"><code>library(boot)
 cv &lt;- cv.glm(data = alc, cost = loss_func, glmfit = m8, K = 10)
 cv$delta[1]</code></pre>
-<pre><code>## [1] 0.2696335</code></pre>
+<pre><code>## [1] 0.2591623</code></pre>
 <p><strong>Interpretation</strong>: In this model with 2 predictors, the results of 10-fold cross-validation shows that the average prediction error of this model is 0.261.</p>
 <pre class="r"><code>m9 &lt;- glm(high_use ~ sex , data = alc, family = &quot;binomial&quot;)
 loss_func &lt;- function(class, prob) {
