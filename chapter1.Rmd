@@ -1,17 +1,17 @@
-
+---
+title: "IODS course project"
+author: "Faranak Halali"
+---
 # About the project
 
-*Write a short description about the course and add a link to your GitHub repository here. This is an R Markdown (.Rmd) file so you can use R Markdown syntax.*
-
-# Introduction
 Hi! My name is **Faranak Halali** and I am PhD student in *Clinical Nutrition*. I have never worked with R before, until last 2 weeks where I started to learn R basics in Datacamp. I am really excited for this course. I heared about the course from my supervisor and I thank her for that. Here is my GitHub repository link: 
 [link](https://github.com/faranakhalali/IODS-project/settings)
 
-# Chapter 2
-Regression and model validation
+# Week 2: Regression and model validation
 
-# Chapter 3
-Logistic regression
 
-# Chapter 4
-Clustering and classification
+# Week 3: Logistic regression
+
+
+# Week 4: Clustering and classification
+
