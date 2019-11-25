@@ -2,16 +2,18 @@
 title: "IODS course project"
 author: "Faranak Halali"
 ---
+<a href="#About the project">About the project</a><br>
+<a href="#Week 2: Regression and model validation">Week 2: Regression and model validation</a><br>
+<a href="#Week 3: Logistic regression">Week 3: Logistic regression</a><br>
+<a href="#Week 4: Clustering and classification">Week 4: Clustering and classification</a><br>
+
+
+
 # About the project
 
 Hi! My name is **Faranak Halali** and I am PhD student in *Clinical Nutrition*. I have never worked with R before, until last 2 weeks where I started to learn R basics in Datacamp. I am really excited for this course. I heared about the course from my supervisor and I thank her for that. Here is my GitHub repository link: 
 [link](https://github.com/faranakhalali/IODS-project/settings)
 
-# Week 2: Regression and model validation
 
 
-# Week 3: Logistic regression
-
-
-# Week 4: Clustering and classification
 
