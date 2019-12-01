@@ -1,7 +1,12 @@
 ---
 Title: "Chapter 3, Logistic regression"
 ---
-Author: Faranak Halali
+---
+title: "chapter3.Rmd"
+author: "Faranak Halali"
+output: 
+  html_document:
+---
 
 # Week 3: Logistic Regression
 This week I used the data on students performance in math class and portugese language class. I started with data wrangling and then continued with data analysis. This week's analysis is logistic regression, which is used to study the odds of success in a binary dependent variable based on explanatory variables.

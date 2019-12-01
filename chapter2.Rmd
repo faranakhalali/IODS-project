@@ -1,3 +1,12 @@
+
+---
+title: "chapter2.Rmd"
+author: "Faranak Halali"
+output: 
+  html_document:
+---
+
+
 # Week 2: Regression and model validation
 This data has 183 observations for 60 variables. The variables inlcude several questions about different topics along with Age, combination score for Attitude, gender and total points.Today, I read the data from URL web page, combined the questions related to deep, surf and stra and created new columns for each. Then, I made a new dataset including only 7 variables:age, gender, attitude, points, deep, surf, stra. I scaled the combined variables to original scale by dividing each to the number of their questions. I excluded Points>0 values and the Newdata now has 166 observations of 7 variables. I saved the data into csv format using write.csv function. I read the Newdata again and explored the dimensions and structure of the data to check whether everything was done right.
 

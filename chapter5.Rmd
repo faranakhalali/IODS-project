@@ -1,8 +1,10 @@
 ---
-title: "Dimensionality reduction techniques"
-output: html_document
-author: Faranak Halali, 30.11.2019
+title: "chapter5.Rmd"
+author: "Faranak Halali"
+output: 
+  html_document:
 ---
+
 # Week 5: Dimensionality reduction techniques
 
 Visualizing data

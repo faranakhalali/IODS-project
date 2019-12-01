@@ -1,7 +1,10 @@
 ---
 title: "chapter4.Rmd"
-output: html_document
-author: Faranak Halali, 24.11.2019
+author: "Faranak Halali"
+output: 
+  html_document:
+---
+
 
 # Week 4: Clustering and classification
 This week's task deals with clustering and classification methods. Boston dataset will be used.
