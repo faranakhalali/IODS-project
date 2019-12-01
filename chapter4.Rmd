@@ -6,7 +6,7 @@ author: Faranak Halali, 24.11.2019
 # Week 4: Clustering and classification
 This week's task deals with clustering and classification methods. Boston dataset will be used.
 
-# Loading and exploring data
+Loading and exploring data
 ```{r}
 library(MASS)
 data("Boston")
@@ -15,14 +15,14 @@ dim(Boston)
 ```
 **Interpretation**: Boston dataset contains 506 rows (observations) with 14 variables (columns). It is about housing values in suburbs of Boston, USA. All the variables are numeric. Example variables are: crim = per capite crime rates, indus = proportion of non-retail business acres per town, nox = nitrogen oxides concentration (parts per 10 million).
 
-# Graphical overview and summary of the data
+Graphical overview and summary of the data
 ```{r}
 summary(Boston)
 pairs(Boston)
 ```
 **Interpretation**: Summary of the variables shows the min and max values of each variable plus the quartiles (Q1, Q2 = median, Q3) and mean. For example for the variable crim: the mean value for the per capite crime rate is 3.61. The plot matrix shows the relationships between pairs of variables. For example, there is a low-steep positive relationship between nox and age.
 
-# Standardize the dataset
+Standardize the dataset
 ```{r}
 boston_scaled <- scale(Boston)
 summary(boston_scaled)
@@ -31,7 +31,7 @@ boston_scaled <- as.data.frame(boston_scaled)
 ```
 **Interpretation**: Here, we standardized (z-normalized) the dataset because different variables in the dataset may have different dimensions and measured on different scales. Looking into the results of data normalization, all the variables have now a mean of zero. 
 
-# Create a categorical variable of the crime rate
+Create a categorical variable of the crime rate
 ```{r}
 bins <- quantile(boston_scaled$crim)
 bins
@@ -40,13 +40,13 @@ table(crime)
 ```
 **Interpretation**: Based on the its quantiles, the original continuous crim variables was converted to a 4-level categorical variable called crime. The categories of this new variable are: low, med_low, med_high, high.
 
-# Drop the old crime variable and add the new categorical crime variable
+Drop the old crime variable and add the new categorical crime variable
 ```{r}
 boston_scaled <- dplyr::select(boston_scaled, -crim)
 boston_scaled <- data.frame(boston_scaled, crime)
 ```
 
-# Divide the dataset to train and test sets
+Divide the dataset to train and test sets
 ```{r}
 n <- nrow(boston_scaled)
 ind <- sample(n,  size = n * 0.8)
@@ -54,24 +54,24 @@ train <- boston_scaled[ind,]
 test <- boston_scaled[-ind,]
 ```
 
-# Save the correct classes from test data
+Save the correct classes from test data
 ```{r}
 correct_classes <- test$crime
 ```
 
-# Remove the crime variable from test data
+Remove the crime variable from test data
 ```{r}
 test <- dplyr::select(test, -crime)
 ```
 
-# Linear discriminant analysis
+Linear discriminant analysis
 ```{r}
 lda.fit <- lda(crime ~ ., data = train)
 lda.fit
 ```
 **Interpretation**: out of 404 observations (506*0.80), 100 belong to low crime category, 99 to med_low, 105 to med_high, and 100 to high category. Next, we see the means of scaled variables in each of the 4 crime categories. **Coefficients of linear discriminants** show the linear combination of predictor variables that are used to form the LDA decision rule. for example, LD1 = 0.132*zn + 0.039*indus - 0.069*chas,...... . **Proportion of trace** is the percentage separation in crime classes achieved by each discriminant function. In this case, LD1 has the highest separation percentage.
 
-# Plot the LDA results
+Plot the LDA results
 ```{r}
 lda.arrows <- function(x, myscale = 1, arrow_heads = 0.1, color = "orange", tex = 0.75, choices = c(1,2)){
   heads <- coef(x)
@@ -87,14 +87,14 @@ lda.arrows(lda.fit, myscale = 1)
 ```
 **Interpretation**: I can say that the combination of 'rad & zen & nox' variables are the most influential separators of the crime categories.
 
-# Predict LDA
+Predict LDA
 ```{r}
 lda.pred <- predict(lda.fit, newdata = test)
 table(correct = correct_classes, predicted = lda.pred$class)
 ```
 **Interpretation**: LDA estimates the probability of a new set of inputs belonging to every class. The output class is the one that has the highest probability. In the test data, 32 observations are in the low crime category and LDA predicts 16 of them to be in low and the other 16 to be in med_low crime category (50% correct prediction). Out of 24 observations in the med_low crime category the LDA model predicts 20 in med_low and 4 in low category (83% correct prediction). Out of 24 med_high observations, the model predicts 12 in med_low and 12 in med_high category (50% correct prediction). Of 21 high crime observations the model predicts all to belong to high category (100% correct prediction). So, the highest correct predictions belong to the 2 ends of the crime levels, i.e., low and high. 
 
-# Reload and standardize the Boston dataset
+Reload and standardize the Boston dataset
 ```{r}
 library(MASS)
 data("Boston")
@@ -104,7 +104,7 @@ class(boston_scaled)
 boston_scaled <- as.data.frame(boston_scaled)
 ```
 
-# Calculate the Euclidian and Manhattan distances between the observations
+Calculate the Euclidian and Manhattan distances between the observations
 ```{r}
 dist_eu <- dist(boston_scaled)
 summary(dist_eu)
@@ -113,21 +113,21 @@ summary(dist_man)
 ```
 **Interpretation**: I calculated the similarity (distance) between the observations by two methods: Euclidian distances (EuD) and Manhattan distances (MD). EuD is the length of the line segment connecting the observations. The median and mean EuD are 5.13 and 5.15, respectively. Manhattan method calculates the distances between points with a different approach using only the absolute (positive) values of the points. In this dataset, the median and mean MD are 13.7 and 14.7, respectively.
 
-# K-means clustering and optimal number of clusters
+K-means clustering and optimal number of clusters
 ```{r}
 set.seed(123)
 k_max <- 10
 twcss <- sapply(1:k_max, function(k){kmeans(boston_scaled, k)$tot.withinss})
 ```
 
-# Visulaize the K-means clustering
+Visulaize the K-means clustering
 ```{r}
 library(ggplot2)
 qplot(x = 1:k_max, y = twcss, geom = 'line')
 ```
 **Interpretation**: I used the within cluster sum of squares (WCSS) to determine the optimal number of clusters. In the figure we are looking for an ‘elbow’ which demarks significant drop in rate of increase in WCSS. K=2 seems a good choice here.
 
-# Run K-means clustering with K=2 and its visulaization
+Run K-means clustering with K=2 and its visulaization
 ```{r}
 km <-kmeans(boston_scaled, centers = 2)
 pairs(boston_scaled, col = km$cluster)
@@ -135,7 +135,7 @@ pairs(boston_scaled, col = km$cluster)
 **Interpretation**: Based on the figure, the variable 'tax'in combination with most of the other variables distinguish the two clusters pretty well. Also, 'nox'&'dis' and 'dis'&'age' distinguish the clusters better than the other variable combinations.
   
   
-# Bonus question
+Bonus question
 ```{r}
 library(MASS)
 data("Boston")
@@ -162,7 +162,7 @@ lda.arrows(lda.fit.1, myscale = 1)
 **Interpretation**: I performed K-means clustering on the standardized dataset with defind number of clusters=4. 202 observations belonged to cluster 1, 123 to C2, 128 to C3 and 53 to C4. Cluster 4 includes much lower proportion of the observations than the other 3 clusters and this could indicate that maybe 4 clusters is not the perfect solution. In the biplot, I can say that the linear combination of 'indus & rad & black & zn' variables are the most influential separators of the clusters.
 
 
-# Super-bonus question
+Super-bonus question
 ```{r}
 model_predictors <- dplyr::select(train, -crime)
 

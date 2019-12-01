@@ -1,6 +1,9 @@
 ---
 title: "IODS course project"
 author: "Faranak Halali"
+output: 
+  html_document:
+    toc: true   
 ---
 
 ***

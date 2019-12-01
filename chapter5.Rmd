@@ -4,7 +4,8 @@ output: html_document
 author: Faranak Halali, 30.11.2019
 ---
 # Week 5: Dimensionality reduction techniques
-# Visualizing data
+
+Visualizing data
 ```{r}
 library(dplyr)
 library(GGally)
@@ -27,7 +28,7 @@ cor(human_) %>% corrplot
 **Interpretation**:In the variables's summary we can see the 6 measures (min, Q1, median, mean, Q3, max) for the 8 variables of the data. In the pairs plot we can see the distributions of the variables as well as the correlation between each pair of them. For example, the variable *expected years of education* has a relatively normal distribution whereas *maternal mortality* is skewed to the left. Regarding the correlation coefficients, the strongest correlation (correlation coefficient = -0.857) is between *maternal mortality* and *life expectancy* which is a negative correlation, i.e., the lower rate of maternal mortality the higher life expectancy. The strongest positive correlation (correlation coefficient = 0.789) is between *expected years of education* and  *life expectancy*. These outcomes are also confirmed in the correlation plot.
 
 
-# Principal component analysis (PCA) on unstandardized data and its biplots
+Principal component analysis (PCA) on unstandardized data and its biplots
 ```{r}
 pca <- prcomp(human_)
 biplot(pca, choices = 1:2, cex = c(0.8, 1), col = c("grey40", "deeppink2"))
@@ -39,7 +40,7 @@ pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
 biplot(pca, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
 ```
 
-# Principal component analysis (PCA) on the standardized data
+Principal component analysis (PCA) on the standardized data
 ```{r}
 human_std <- scale(human_)
 pca_std <- prcomp(human_std)
@@ -55,11 +56,11 @@ biplot(pca_std, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1
 **Interpretation**: PCA on unstandardized data yields 8 PCs where the first PC explains the highest variance (94.2%). Subsequently, the % of variance explained by the PCs decreases up to a point where PC7 and PC8 explain zero variance of the data. The biplot of the PCA on unstandardized data shows that the datapoints are not well categorized in the first 2 components. Also the contribution of the variables in PCs and their correlations with each other is not clear. We can only see that the variables *maternal mortality* and *GNI* have a small correlation (because of large angle between their arrows). Also, based on the directions of the arrows we can say that *maternal mortality* contributes to PC1 and *GNI* contributes to PC2. 
 
 
-# Interpretations of the first two principal component dimensions after standardization
+Interpretations of the first two principal component dimensions after standardization
 PCA on standardized data yields way too much better and clearer results because the variables are measured with diffrent scales and have different dimensions and standardization solves this problem. The importance of the PCs of the standardzied PCA makes more sense (PC1 for 48.3% and PC2 for 16.2%). There is no PC with zero variance explained, although the last PCs explain smaller proportion of the variance. The biplot shows more clearly the variables and their correlations as well as the correlation between the variables and the PCs. For example, there is a high positive correlation between *maternal mortality* and *adolscent birth rate* (small angle between their arrows) and both these variables contribute to PC1 (direction of their arrows). Also, there is a smaller positive correlation between *percent of females in parliament* and *higher labour force participation rate of females* and both these variables contribute to the PC2 (because of the direction of their arrows).
 
 
-# Load the tea dataset and exploring it
+Load the tea dataset and exploring it
 ```{r}
 library(FactoMineR)
 data("tea")
@@ -70,7 +71,7 @@ summary(tea)
 **Interpretation**: Tea data includes answers to a questionnaire on tea consumption. It has 300 onservations and 36 variables. 300 individuals were asked about how they drink tea (18 questions), what are their product's perception (12 questions) and some personal details (4 questions). Except for the age, all the variables are categorical. For the age, the data set has two different variables: a continuous and a categorical one. For example, 74 individuals drink black tea, 193 drink earl grey and 33 drink green tea. Participants are 15-90 years old with a mean age of 37 years with most of them belonging to the 15-24 years age group. 
 
 
-# Keeping some columns of the tea data and visulaizing it
+Keeping some columns of the tea data and visulaizing it
 ```{r}
 keep_columns <- c("Tea", "How", "how", "sugar", "where", "lunch")
 tea_time <- select(tea, one_of(keep_columns))
@@ -86,7 +87,7 @@ gather(tea_time) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + g
 **Interpretation**: Now, tea_time data has 300 onservations and only 6 variables. From the plots we can see that: 1) Most of the participants drink tea bag. 2) Most of the participants drink tea alone with no added ingredient. 3) Most of the participants do not drink tea in lunch time. 4) There is a very small differene between the number of people who either add or do not add sugar to their tea. 5) Most of the participants choose earl grey tea to drink. 6) Most of the participants buy their tea from the chain stores. 
 
 
-# Multiple Correspondence Analysis on the tea data
+Multiple Correspondence Analysis on the tea data
 ```{r}
 mca <- MCA(tea_time, graph = FALSE)
 summary(mca)

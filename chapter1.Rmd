@@ -2,12 +2,6 @@
 title: "IODS course project"
 author: "Faranak Halali"
 ---
-<a href="#About the project">About the project</a><br>
-<a href="#Week 2: Regression and model validation">Week 2: Regression and model validation</a><br>
-<a href="#Week 3: Logistic regression">Week 3: Logistic regression</a><br>
-<a href="#Week 4: Clustering and classification">Week 4: Clustering and classification</a><br>
-<a href="#Week 5: Dimensioality reduction techniques">Week 5: Dimensioality reduction techniques</a><br>
-
 
 # About the project
 
