@@ -129,6 +129,7 @@ tukey <- TukeyHSD(anova)
 tukey
 plot(tukey)
 ```
+
 The output contains the mean difference between each of group pairs, lower end and upper end of the 95% confidence interval and the adjusted p-values. The results of the Tukey test show that all three group pairs are significantly different from each other (G1&G2, G1&G3, G2&G3). 
 
 
